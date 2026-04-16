@@ -1,0 +1,148 @@
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крестики-Нолики</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Окно авторизации -->
+        <div id="auth-screen" class="screen active">
+            <div class="auth-container">
+                <h2>Авторизация</h2>
+                <div class="auth-tabs">
+                    <button class="tab-btn active" onclick="showAuthTab('signin')">Вход</button>
+                    <button class="tab-btn" onclick="showAuthTab('signup')">Регистрация</button>
+                </div>
+                
+                <!-- Форма входа -->
+                <form id="signin-form" class="auth-form active">
+                    <input type="text" id="signin-username" placeholder="Имя пользователя" required>
+                    <input type="password" id="signin-password" placeholder="Пароль" required>
+                    <button type="submit">Войти</button>
+                </form>
+
+                <!-- Форма регистрации -->
+                <form id="signup-form" class="auth-form">
+                    <input type="text" id="signup-username" placeholder="Имя пользователя" required>
+                    <input type="password" id="signup-password" placeholder="Пароль" required>
+                    <button type="submit">Зарегистрироваться</button>
+                </form>
+                
+                <p id="auth-message"></p>
+            </div>
+        </div>
+
+        <!-- Главное меню -->
+        <div id="main-menu" class="screen">
+            <div class="menu-container">
+                <h2>Главное меню</h2>
+                <div class="user-info">
+                    <span id="current-user">Пользователь</span>
+                </div>
+                <button onclick="showScreen('create-game-screen')">Создать игру</button>
+                <button onclick="showScreen('browser-screen')">Браузер игр</button>
+                <button onclick="showScreen('game-history-screen')">История игр</button>
+                <button onclick="showScreen('leaderboard-screen')">Лидерборд</button>
+                <button onclick="logout()">Выйти</button>
+            </div>
+        </div>
+
+        <!-- Создание игры -->
+        <div id="create-game-screen" class="screen">
+            <div class="menu-container">
+                <h2>Создание игры</h2>
+                <div class="form-group">
+                    <label>Сторона:</label>
+                    <select id="side-select">
+                        <option value="1">Крестики</option>
+                        <option value="2">Нолики</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="cpu-game"> Играть против компьютера
+                    </label>
+                </div>
+                <button onclick="createGame()">Создать игру</button>
+                <button class="secondary" onclick="showScreen('main-menu')">Назад</button>
+            </div>
+        </div>
+
+        <!-- Браузер игр -->
+        <div id="browser-screen" class="screen">
+            <div class="menu-container">
+                <h2>Браузер игр</h2>
+                <div id="games-list" class="games-list">
+                    <div class="empty-state">Загрузка игр...</div>
+                </div>
+                <div class="button-group">
+                    <button onclick="loadGames()">Обновить список</button>
+                    <button class="secondary" onclick="showScreen('main-menu')">Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- История игр -->
+        <div id="game-history-screen" class="screen">
+            <div class="menu-container">
+                <h2>История игр</h2>
+                <div id="game-history-list" class="games-list">
+                    <div class="empty-state">Загрузка истории...</div>
+                </div>
+                <div class="button-group">
+                    <button onclick="loadGameHistory()">Обновить</button>
+                    <button class="secondary" onclick="showScreen('main-menu')">Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Лидерборд -->
+        <div id="leaderboard-screen" class="screen">
+            <div class="menu-container">
+                <h2>Лидерборд</h2>
+                <div id="leaderboard-list" class="games-list">
+                    <div class="empty-state">Загрузка рейтинга...</div>
+                </div>
+                <div class="button-group">
+                    <button onclick="loadLeaderboard()">Обновить</button>
+                    <button class="secondary" onclick="showScreen('main-menu')">Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Игровое поле -->
+        <div id="game-screen" class="screen">
+            <div class="game-container">
+                <div class="game-header">
+                    <h2 id="game-title">Игра</h2>
+                    <div id="game-status" class="status">Подключение...</div>
+                </div>
+                
+                <div id="game-board" class="game-board">
+                    <!-- Игровое поле 3x3 -->
+                </div>
+                
+                <div id="game-info" class="game-info">
+                    <div class="players-info">
+                        <div class="player">
+                            <span class="symbol x">X</span>
+                            <span id="player-x">Ожидание...</span>
+                        </div>
+                        <div class="player">
+                            <span class="symbol o">O</span>
+                            <span id="player-o">Ожидание...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="leaveGame()">Покинуть игру</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
