@@ -14,7 +14,7 @@
 - Fx (dependency injection)
 
 ### Frontend
-- Vanilla HTML / CSS / JS (SPA)
+- HTML / CSS / JS (SPA)
 - Fetch API
 
 ### DevOps
